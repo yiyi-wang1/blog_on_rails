@@ -1,0 +1,27 @@
+<div class="mt-3 ms-3" style="width: 30rem;">
+    <% if @post.errors.any? %>
+        <div class="alert alert-danger">
+            <p>Please fix the errors below.</p>
+            <ul class="rails-bootstrap-forms-error-summary">
+                <% @post.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div>
+        <%= bootstrap_form_with(model: @post) do |f|%>
+            <%=f.text_field :title%>
+            <%=f.text_area :body, rows:5%>
+            <% if @post.id %>
+                <%= f.submit "Update Post", class: "btn btn-outline-primary" %>
+            <% else %>
+                <%= f.submit "Create Post", class: "btn btn-outline-primary" %>
+            <% end %>
+        <% end %>
+    </div>
+    
+    
+</div>
+
