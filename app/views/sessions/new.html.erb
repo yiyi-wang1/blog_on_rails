@@ -1,0 +1,18 @@
+<div class="mt-3 ms-3" style="width: 30rem;">
+    <% if @user && @user.errors.any? %>
+        <div class="alert alert-danger">
+            <p>Please fix the errors below.</p>
+            <ul class="rails-bootstrap-forms-error-summary">
+                <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <%= bootstrap_form_with(url: session_path) do |f|%>
+        <%=f.text_field :email%>
+        <%=f.password_field :password %>
+        <%= f.submit "Login", class: "btn btn-outline-primary" %>
+    <% end %>
+</div>
