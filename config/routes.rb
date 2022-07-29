@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get 'users/:id/edit_password', to: 'users#edit_password', as: :edit_password_user
 
-  post 'users/:id/change_password', to: 'users#change_password', as: :change_password_user
+  patch 'users/:id/change_password', to: 'users#change_password', as: :change_password_user
 
   resource :session, only: [:create, :new, :destroy]
 end
