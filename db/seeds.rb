@@ -8,18 +8,42 @@
 
 Comment.destroy_all
 Post.destroy_all
+User.destroy_all
+
+DEFAULT_PASSWORD = "123"
+
+admin_user = User.create(
+    name: "admin",
+    email: "admin@example.com",
+    password: DEFAULT_PASSWORD,
+    is_admin: true
+)
+
+20.times do |n|
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    User.create(
+        name: "#{first_name} #{last_name}",
+        email: "#{first_name}@example.com",
+        password: DEFAULT_PASSWORD
+    )
+end
+
+users = User.all
 
 60.times do |n|
     p = Post.create(
         title: Faker::Lorem.unique.sentence,
-        body: Faker::Lorem.paragraph(sentence_count: 3)
+        body: Faker::Lorem.paragraph(sentence_count: 3),
+        user: users.sample
     )
 
     if p.valid?
         rand(1..10).times do 
             Comment.create(
                 body: Faker::Lorem.paragraph(sentence_count: 2),
-                post: p
+                post: p,
+                user: users.sample
             )
         end
     end
@@ -28,4 +52,4 @@ end
 posts = Post.all
 comments = Comment.all
 
-p "Created #{posts.count} posts and #{comments.count} comments"
+p "Created #{posts.count} posts, #{comments.count} comments and #{users.count} users"
