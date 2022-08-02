@@ -1,0 +1,11 @@
+
+    <div class="row row-cols-3 ms-3">
+        <% @posts.each do |p| %>
+            <div class="card col m-3 py-3" style="width: 28rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="<%=post_path(p)%>" class="text-decoration-none"><%= p.title%></a></h5>
+                    <p class="card-text text-truncate"><%= p.body%></p>
+                </div>
+            </div>
+        <% end %>
+    </div>
